@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CARDS from './cards';
+import Card from './card';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.updateGoto = this.updateGoto.bind(this);
+    this.go = this.go.bind(this);
+
+    this.state = {
+      goto: ""
+    }
+  }
+
+  updateGoto(event) {
+    this.setState({goto: event.target.value});
+  }
+
+  go(event) {
+    const element = document.getElementById("card-" + this.state.goto);
+    element.scrollIntoView(true);
+  }
+
   render() {
+    let cards = [];
+
+    CARDS.forEach((card) => {
+      const new_card = (<Card card={card} />);
+      cards.push(new_card);
+    });
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="goto"><input type="text" value={this.state.goto} onChange={this.updateGoto} /><button onClick={this.go}>go</button></div>
+        <div className="cards">
+          {cards}
+        </div>
       </div>
     );
   }
