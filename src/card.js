@@ -16,11 +16,11 @@ class Card extends Component {
   }
 
   render() {
-    const title = "" + this.props.card.no + ". " + this.props.card.english;
+    const title = "" + this.props.card.no + ". " + this.props.card.japanese;
     const button_text = this.state.show ? "hide" : "show";
     const details = (
       <div className="details">
-        <div className="answer">{this.props.card.japanese}</div>
+        <div className="answer">{this.props.card.english}</div>
         <div className="notes">{this.props.card.note}</div>
       </div>
     );
